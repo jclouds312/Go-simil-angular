@@ -1,0 +1,511 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalUsuarioDatosAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label>INE</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtCi" #ctrl="ngModel"
+                                placeholder="INE">
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtComplemento" #ctrl="ngModel"
+                                placeholder="Complemento de CI">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNombre" #ctrl="ngModel"
+                                placeholder="Nombre del usuario">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ap. Paterno</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtAppat" #ctrl="ngModel"
+                                placeholder="Ap. Paterno">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ap. Materno</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtApmat" #ctrl="ngModel"
+                                placeholder="Ap. Materno">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" [(ngModel)]="txtFechaNac" #ctrl="ngModel"
+                                placeholder="Fecha de Nacimiento">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Genero</label>
+                            <select class="form-control" [(ngModel)]="cboxGenero">
+                                <option value="" selected disabled> Seleccione una Opción </option>
+                                <option value="Femenino"> Femenino </option>
+                                <option value="Masculino"> Masculino </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Celular</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtCelular" #ctrl="ngModel"
+                                placeholder="Celular">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Correo Electronico</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtEmail" #ctrl="ngModel"
+                                placeholder="Correo Electronico">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Rol de Usuario</label>
+                            <select class="form-control" [(ngModel)]="cboxRol">
+                                <option value="" selected disabled> Seleccione una Opción </option>
+                                <option value="Administrador"> Administrador </option>
+                                <option value="Vendedor Optica"> Vendedor Optica </option>
+                                <option value="Vendedor Audiosim"> Vendedor Audiosim </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="click_agregarUsuarioPass()" type="button"
+                    class="btn btn-info text-white">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalUsuarioPassAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Usuario para Login</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtUsuario" #ctrl="ngModel"
+                                placeholder="Nombre de la Almacen">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" [(ngModel)]="txtPass" #ctrl="ngModel"
+                                placeholder="Nombre de la Almacen">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Repetir Contraseña</label>
+                            <input type="password" class="form-control" [(ngModel)]="txtPassRepetir" #ctrl="ngModel"
+                                placeholder="Nombre de la Almacen">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarUsuario()" type="button"
+                    class="btn btn-info text-white">Registrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="modalUsuarioEditar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label>INE</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtCiEditar" #ctrl="ngModel"
+                                placeholder="INE">
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtComplementoEditar" #ctrl="ngModel"
+                                placeholder="Complemento de CI">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNombreEditar" #ctrl="ngModel"
+                                placeholder="Nombre del usuario">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ap. Paterno</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtAppatEditar" #ctrl="ngModel"
+                                placeholder="Ap. Paterno">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ap. Materno</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtApmatEditar" #ctrl="ngModel"
+                                placeholder="Ap. Materno">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" [(ngModel)]="txtFechaNacEditar" #ctrl="ngModel"
+                                placeholder="Fecha de Nacimiento">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Genero</label>
+                            <select class="form-control" [(ngModel)]="cboxGeneroEditar">
+                                <option value="" selected disabled> Seleccione una Opción </option>
+                                <option value="Femenino"> Femenino </option>
+                                <option value="Masculino"> Masculino </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Celular</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtCelularEditar" #ctrl="ngModel"
+                                placeholder="Celular">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Correo Electronico</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtEmailEditar" #ctrl="ngModel"
+                                placeholder="Correo Electronico">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="actualizarUsuarioById()" type="button"
+                    class="btn btn-info text-white">Actualizar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="modalUsuarioPassEditar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Editar Usuario y Contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Ingrese su Contraseña</label>
+                            <input type="password" class="form-control" [(ngModel)]="txtPassEditar" #ctrl="ngModel"
+                                placeholder="Contraseña Antigua">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Nueva Contraseña</label>
+                            <input type="password" class="form-control" [(ngModel)]="txtPassNuevo" #ctrl="ngModel"
+                                placeholder="Contraseña Nueva">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Repetir Nueva Contraseña</label>
+                            <input type="password" class="form-control" [(ngModel)]="txtPassNuevoRepetir" #ctrl="ngModel"
+                                placeholder="Repetir Contraseña Nueva">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="actualizarPasswordById()" type="button"
+                    class="btn btn-info text-white">Actualizar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSucursalAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Agregar a Acceso a Sucursales</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <label>Acceso a Sucursal:</label>
+                        <select class="form-control" [(ngModel)]="idSucursalAgregar">
+                            <option [ngValue]="null" disabled selected>Seleccione una Sucursal</option>
+                            <option *ngFor="let element of listaSucursalesAgregar" [ngValue]="element.idSucursal">
+                                {{ element.nombreSucursal }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarUsuarioSucursal()" type="button"
+                    class="btn btn-info text-white">Actualizar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSucursal" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Lista de accesos a Sucursales</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sucursal</th>
+                                    <th style="width: 40px">Opc.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaSucursales; let i = index">
+                                    <td>{{element.nombreSucursal}}</td>
+                                    <td class="project-actions text-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger" (click)="actualizarSucursalEstadoById(element)"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Usuarios</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>Usuarios</h4>
+                        </div>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-block btn-outline-primary btn-sm" (click)="click_agregarUsuario()">Nuevo Usuario</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                            class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Opc.</th>
+                                    <th>Usuario</th>
+                                    <th>Celular</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let element of listaUsuarios; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td class="project-actions text-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info" (click)="click_irComision(element)">Comisiones</button>
+                                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_actualizarUsuario(element)"><i class="fas fa-edit"></i> Actualizar Datos</a>
+                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_actualizarPass(element)"><i class="fas fa-edit"></i> Actualizar Contraseña</a>
+                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_deshabilitarUsuario(element)"><i class="fas fa-trash"></i> Deshabilitar</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_listaSucursal(element)"><i class="fas fa-list"></i> Acceso a Sucursal</a>
+                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_agregarSucursal(element)"><i class="fas fa-plus"></i> Agregar Sucursal</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <small>Rol: {{element.idRol}}</small>
+                                        <br>
+                                        {{element.nombre}} {{element.appat}} {{element.apmat}}
+                                    </td>
+                                    <td>{{element.celular}}</td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Opc.</th>
+                                    <th>Usuario</th>
+                                    <th>Celular</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

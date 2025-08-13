@@ -1,0 +1,122 @@
+<div class="modal fade" id="modalSucursalAlmacen" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Asignar Almacén a la Sucursal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 text-center" *ngIf="listaSucursalAlmacen.length == 0">
+                        <h5 class="mt-5 text-muted">No se encontraron almacenes asignados. Por favor, asigne un almacén para continuar.</h5>
+                    </div>
+                    <div class="col-12" *ngIf="listaSucursalAlmacen.length > 0">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Almacén</th>
+                                    <th class="text-center">Opc.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaSucursalAlmacen; let i = index">
+                                    <td class="text-center">{{ element.nombreAlmacen }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-sm ms-2"
+                                            (click)="click_eliminarAlmacen(element)"><i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="dropdown-divider" style="margin-top: 20px; margin-bottom: 20px;"></div>
+
+                    <div class="col-12">
+                        <label>Almacenes a Asignar</label>
+                        <div class="input-group">
+                            <select class="form-control" [(ngModel)]="cboxAlmacen">
+                                <option [ngValue]="null" disabled selected>Seleccione un Almacén</option>
+                                <option *ngFor="let element of listaAlmacen" [ngValue]="element">
+                                    {{ element.nombreAlmacen }}
+                                </option>
+                            </select>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-info btn-flat" (click)="agregarSucursalAlmacen();" >Asignar</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Sucursal: {{ lblNombreSucursal }}</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Opciones</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-info btn-block" (click)="click_venta()">Venta Nueva</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-success btn-block" (click)="click_producto()">Producto Más Vendido</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-warning btn-block" (click)="click_usuario()">Ventas por Usuario</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-danger btn-block" (click)="click_listaVenta()">Lista de Ventas</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-info btn-block" (click)="click_listaCuentas()">Cuentas</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2" *ngIf="idRol == 'Administrador'">
+                                    <button type="button" class="btn btn-outline-success btn-block" (click)="click_asignarAlmacen()">Asignar Almacén</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2" *ngIf="idRol == 'Administrador'">
+                                    <button type="button" class="btn btn-outline-success btn-block" (click)="click_comision()">Comisiones</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

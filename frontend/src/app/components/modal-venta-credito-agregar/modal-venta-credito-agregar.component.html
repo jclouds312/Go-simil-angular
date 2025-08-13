@@ -1,0 +1,45 @@
+<div class="modal fade" id="modalPagoCredito" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Pago de Venta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Monto de Pago ($)</label>
+                            <input type="number" step="0.01" class="form-control" [(ngModel)]="txtCreditoMonto" #ctrl="ngModel"
+                                placeholder="Monto de Pago">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Metodo de Pago(Cuenta)</label>
+                            <select class="form-control" [(ngModel)]="cboxCuenta">
+                                <option [ngValue]="" disabled selected>Seleccione una Cuenta</option>
+                                <option *ngFor="let element of listaCuentas" [ngValue]="element.idCuenta">
+                                    {{ element.alias }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                <button data-toggle="modal" (click)="click_agregarPago()" type="button"
+                    class="btn btn-info text-white">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>

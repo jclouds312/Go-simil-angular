@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+/* span{
+    color: #1d72bc;
+}
+ */
+
+
+.wrapper .content-wrapper{
+    background-color: #DCDEDD;
+}
+ 
+.modal-dialog .modal-content{
+    background-color:#DCDEDD;;
+}
+
+.card .card-header{
+    background-color: #fff;
+    color: #3c54a5;
+    border-bottom: 1px solid #3c55a55d;
+}
+
+.modal-body{
+    background-color: #fff;
+}
+
+.card-primary:not(.card-outline) > .card-header{
+    background-color: #54656F !important;
+}
+

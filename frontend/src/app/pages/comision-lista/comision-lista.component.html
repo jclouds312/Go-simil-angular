@@ -1,0 +1,99 @@
+<div [ngClass]="{ 'content-wrapper': lblTitulo == 'Por Usuario' }">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Comisiones</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>{{ lblTitulo }}</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                            class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Venta</th>
+                                    <th>Fecha</th>
+                                    <th>SubTotal</th>
+                                    <th>Detalle</th>
+                                    <th>Comision</th>
+                                    <th *ngIf="idSucursal != '1'">Usuario</th>
+                                    <th>Cliente</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let element of listaComisiones; let i = index">
+                                    <td>{{element.idVenta}}</td>
+                                    <td>
+                                        {{element.fechaVenta}}
+                                        <br>
+                                        <small>Hora: {{element.horaVenta}}</small>
+                                    </td>
+                                    <td>
+                                        <small>$ </small>{{element.subTotal}}
+                                        <br>
+                                        <div *ngIf="element.estadoComision == 'Comision Acumulada'">
+                                            <span class="badge bg-danger">{{element.estadoComision}}</span>
+                                        </div>
+                                        <div *ngIf="element.estadoComision == 'Comision Por Pagar'">
+                                            <span class="badge bg-warning">{{element.estadoComision}}</span>
+                                        </div>
+                                        <div *ngIf="element.estadoComision == 'Comision Pagada'">
+                                            <span class="badge bg-success">{{element.estadoComision}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <small>Meta: $ {{element.meta}}</small>
+                                        <br>
+                                        <small>Porcentaje: {{element.porcentaje}}%</small>
+                                    </td>
+                                    <td>
+                                        <small>$ </small>{{element.comisionUsuario}}
+                                        <br>
+                                        <button (click)="click_pagarComision(element)" *ngIf="element.estadoComision == 'Comision Por Pagar' && idRol == 'Administrador'"
+                                            type="button" class="btn btn-success btn-sm ms-2 mt-2"><i class="fa fa-check"></i> Pagar
+                                        </button>
+                                    </td>
+                                    <td *ngIf="idSucursal != '1'">
+                                        {{element.usuario}}
+                                    </td>
+                                    <td>
+                                        {{element.cliente}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Venta</th>
+                                    <th>Fecha</th>
+                                    <th>SubTotal</th>
+                                    <th>Detalle</th>
+                                    <th>Comision</th>
+                                    <th *ngIf="idSucursal != '1'">Usuario</th>
+                                    <th>Cliente</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

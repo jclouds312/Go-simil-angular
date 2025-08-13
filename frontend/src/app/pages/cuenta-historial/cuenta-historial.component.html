@@ -1,0 +1,291 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalCuentaHistorialAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo {{ lblTipo }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Monto ($)</label>
+                            <input type="number" step="0.01" class="form-control" [(ngModel)]="txtMonto" #ctrl="ngModel"
+                                placeholder="Monto">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Detalle del {{ lblTipo }}</label>
+                            <textarea class="form-control" rows="3" [(ngModel)]="txtDescripcion" #ctrl="ngModel"
+                                placeholder="Ingrese una descripción"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarCuentaHistorial()" type="button"
+                    class="btn btn-info text-white">Registrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalCuentaTransferir" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo {{ lblTipo }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Cuenta Destino</label>
+                            <select class="form-control" [(ngModel)]="cboxCuenta">
+                                <option [ngValue]="null" disabled selected>Seleccione una Cuenta</option>
+                                <option *ngFor="let element of listaCuentas" [ngValue]="element.idCuenta">
+                                    {{ element.alias }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Monto ($)</label>
+                            <input type="number" step="0.01" class="form-control" [(ngModel)]="txtTransferirMonto" #ctrl="ngModel"
+                                placeholder="Monto">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Detalle del {{ lblTipo }}</label>
+                            <textarea class="form-control" rows="3" [(ngModel)]="txtTransferirDescripcion" #ctrl="ngModel"
+                                placeholder="Ingrese una descripción"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="transferirSaldoCuentaByCuenta()" type="button"
+                    class="btn btn-info text-white">Transferir</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Historial de Cuenta</h1>
+                </div>
+                
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-6" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <h3 class="card-title">
+                                <i class="fa fa-cash-register"></i>
+                                Cuentas a Visualizar
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <label>Adiccionar una Cuenta</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control" [(ngModel)]="idCuentaAdicionar">
+                                            <option [ngValue]="null" disabled selected>Seleccione una Cuenta</option>
+                                            <option *ngFor="let element of listaCuentas" [ngValue]="element.idCuenta">
+                                                {{ element.alias }}
+                                            </option>
+                                        </select>
+                                        <span class="input-group-append">
+                                        <button type="button" class="btn btn-info btn-flat" (click)="click_adiccionarCuenta()"><i class="fas fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                    <div class="col-12" style="margin-top: 20px;">
+                                        <label>Cuentas Seleccionadas</label>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cuenta</th>
+                                                    <th>Saldo</th>
+                                                    <th style="width: 40px">Opc.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let element of listaCuentaSeleccionadas; let i = index">
+                                                    <td>{{ element.alias }}</td>
+                                                    <td><small>$ </small>{{ element.saldo }}</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-danger" (click)="click_eliminarCuenta(element)"><i class="fas fa-trash"></i></button>
+                                                            <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_trasnferir(element)"><i class="fas fa-edit"></i> Transferir a otra Cuenta</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_agregarIngreso(element)"><i class="fas fa-edit"></i> Nuevo Ingreso</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" (click)="click_agregarEgreso(element)"><i class="fas fa-edit"></i> Nuevo Egreso</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Resumen de Cuenta
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:50%">Total Ingreso:</th>
+                                            <td><small>$ </small>{{ lblTotalIngreso }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Egreso:</th>
+                                            <td><small>$ </small> {{ lblTotalEgreso }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Saldo:</th>
+                                            <td><small>$ </small>{{ lblTotalSaldo }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-component-filtro-fecha
+                (eventOutput_buscar)="eventOutput_buscar($event)">
+            </app-component-filtro-fecha>
+
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-cash-register"></i>
+                            Visualiza el Historial de una o varias Cuentas
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                            class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Saldo</th>
+                                    <th>Cuenta</th>
+                                    <th>Descripción</th>
+                                    <th>Usuario</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let element of listaHistorial; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>
+                                        <a>{{element.fecha}}</a>
+                                        <br/>
+                                        <small>Hora: {{element.hora}}</small>
+                                    </td>
+                                    <td ngClass="{{ element.tipo === 1 ? 'text-verde' : 'text-rojo' }}">
+                                        <small>Tipo: {{element.tipoLiteral}}</small>
+                                        <br/>
+                                        <small>$</small>{{element.montoFormato}}
+                                    </td>
+                                    <td>
+                                        <small>$</small>{{element.saldoFormato}}
+                                    </td>
+                                    <td>{{element.alias}}</td>
+                                    <td>{{element.descripcion}}</td>
+                                    <td><small>{{element.usuario}}</small></td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Saldo</th>
+                                    <th>Cuenta</th>
+                                    <th>Descripción</th>
+                                    <th>Usuario</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

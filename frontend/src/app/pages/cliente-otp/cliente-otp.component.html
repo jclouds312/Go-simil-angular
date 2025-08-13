@@ -1,0 +1,51 @@
+<!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-users"></i>
+                            LECTOR CODIGO OTP
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row invoice-info">
+                            <div class="col-12 col-sm-6 invoice-col">
+                            Documento de Validación:
+                            <address>
+                                <strong>{{ lblDocumento }}</strong><br>
+                                Total: <small>$ </small>{{lblTotal}}<br>
+                                Puntos: {{lblTotalPuntos}}<small> LP</small><br>
+                                {{lblFecha}}
+                            </address>
+                            </div>
+                            <div class="col-12 col-sm-6" *ngIf="firmado == '0'">
+                                <div class="form-group">
+                                    <label>CODIGO  OTP</label>
+                                    <input type="number" class="form-control" [(ngModel)]="txtCodigoOtp"
+                                        #ctrl="ngModel" placeholder="CODIGO">
+                                </div>
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_enviarCodigo()"><i class="fa fa-check"></i>
+                                    ENVIAR CODIGO OTP</button>
+                            </div>
+
+                            <div class="col-12 col-sm-6 invoice-col" *ngIf="firmado == '1'">
+                                <strong>Firmado Electrónicamente por:</strong>
+                                <address>
+                                    <strong>{{ lblOtpCliente }}</strong><br>
+                                    OTP: {{lblOtp}}<br>
+                                    Celular: {{lblOtpCelular}}<small> LP</small><br>
+                                    Fecha: {{lblOtpFecha}}
+                                    <strong>(Firma Electrónica)</strong><br>
+                                </address>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>

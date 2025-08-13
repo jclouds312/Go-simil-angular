@@ -1,0 +1,65 @@
+<div class="login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card rounded" >
+        <!-- CABECERA CARD -->
+          <div class="card-header text-center" style="background-color: #4e66c2;">
+            <a class="h2" style="color: #fff;">SISTEMA DE ADMINISTRACIÓN</a>
+          </div>
+  
+          <!-- CUERPO CARD -->
+          <div class="card-body"   >
+            <div style="align-content: center;" class="text-center">
+              <img src="assets/imagenes/logo.png" width="250px" alt="Logo" style="opacity: .8">
+              <p class="login-box-msg" style="margin-top: 20px;">Ingrese sus Credenciales</p>
+            </div>
+  
+            <!-- USUARIO INPUT -->
+            <div class="input-group mb-3">
+              <input type="text" [(ngModel)]="txtUsuario" #ctrl="ngModel" class="form-control" placeholder="Usuario">
+  
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            
+  
+              <!-- PASSWORD INPUT -->
+              <div class="input-group mb-3">
+                <input type="password" [(ngModel)]="txtPassword" #ctrl="ngModel" class="form-control" placeholder="Contraseña">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+  
+          
+    
+  
+            <!-- LOGIN BUTTON -->
+            <div class="social-auth-links text-center mt-2 mb-3">
+              <a class="btn btn-block btn-outline-info" href="javascript:void(0);"   class="btn btn-block btn-info" (click)="click_login()"> 
+                INGRESAR
+              </a>
+            </div>
+  
+            <!-- RECUPERAR PASSWORD ENLACE -->
+            <p class="mb-2 text-end">
+              <a href="/" style="color: grey;">¿Has olvidado tu contraseña?</a>
+            </p>
+          </div>
+          <!-- /.card-body -->
+  
+  
+          <!-- /.card-footer -->
+          <div class="card-footer text-center" style="background-color: #4e66c2;">
+            <a style="color: #ffffff;">Versión: {{ lblVersion }}</a>
+            </div>
+  
+        </div>
+        <!-- /.card -->
+      </div>
+  </div>

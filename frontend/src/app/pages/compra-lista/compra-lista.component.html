@@ -1,0 +1,216 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalCompraDetalle" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">DETALLE DE LA COMPRA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-primary text-center">
+                            COMPRA NRO.: {{ idCompra }}
+                        </h3>
+                    </div>
+
+                    <!--<h5><strong>Opciones:</strong></h5>
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <div class="row">
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;" *ngIf="idCliente != '1'">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_enviarDocumentoYOtp()"><i class="fa fa-bell"></i>
+                                    {{ btnVentaEnviarDocumento }}</button>
+                            </div>
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_generarDocumentoPdf()"><i class="fa fa-bell"></i>
+                                    Generar PDF</button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <h5><strong>Detalles de la Compra:</strong></h5>
+                    <div class="col-12 col-sm-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i class="fa fa-fw fa-hashtag"></i>
+                                    <strong>Almacén de deposito:</strong> {{ lblDetalleAlmacen }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Cuenta debito:</strong> {{ lblDetalleCuenta }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i class="far fa-fw fa-star"></i>
+                                    <strong>Fecha:</strong> {{ lblDetalleFecha }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i class="far fa-fw fa-star"></i>
+                                    <strong>Registrado por:</strong> {{ lblDetalleUsuario }}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 text-center table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Puntos</th>
+                                    <th>SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaCompraDetalle; let i = index">
+                                    <td>{{ i+1 }}.</td>
+                                    <td>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <small>COD: {{ element.codigoLiteral }}</small>
+                                                <br/>
+                                                <a>{{ element.nombreProducto }}</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>{{ element.cantidad }}</td>
+                                    <td>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <small>Unid: {{ element.puntos }} LP</small>
+                                                <br/>
+                                                <a>{{ element.puntosSubTotal }} <small>LP</small> </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <small>C/U: $ {{ element.costoFormato }}</small>
+                                                <br/>
+                                                <a> <small>$</small> {{ element.subTotalFormato }}</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 order-1 order-sm-2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>Total Puntos:</th>
+                                    <td>{{ lblDetalleTotalPuntos }} <small>LP</small> </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Costo:</th>
+                                    <td> <small>$</small> {{ lblTotal }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Compras</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Todas las Compras</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-block btn-outline-primary btn-sm" (click)="click_agregarCompra()">Nueva Compra</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                        class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Opc.</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Cuenta Origen</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let element of listaCompras; let i = index">
+                                    <td>{{element.idCompra}}</td>
+                                    <td>
+                                        <button style="background-color: #00A884;" (click)="click_verCompra(element)"
+                                            type="button"
+                                            class="btn btn-success btn-sm ms-2"><i class="fa fa-eye"></i> Ver
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <a>{{element.fechaCompra}}</a>
+                                        <br />
+                                        <small>Hora: {{element.horaCompra}}</small>
+                                    </td>
+                                    <td>{{element.totalFormato}}</td>
+                                    <td>{{element.nombreCuenta}}</td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Opc.</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Cuenta Origen</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>

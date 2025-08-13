@@ -1,0 +1,118 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalPrecioVentaAgregar" data-bs-focus="false" data-bs-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Precio de Venta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Nombre del Precio de Venta</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNombre" #ctrl="ngModel"
+                                placeholder="Nombre">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Porcentaje (%)</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtPorcentaje" #ctrl="ngModel"
+                                placeholder="Porcentaje">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarPrecioVenta()" type="button"
+                    class="btn btn-info text-white">Registrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Precios de Venta</h1>
+                </div>
+                
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-cash-register"></i>
+                            Precios de Venta
+                        </h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-block btn-outline-success btn-sm"
+                                (click)="click_agregarPrecioVenta()">Nuevo Precio</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="listaPrecios.length == 0">
+                            <div class="col-12 text-center">
+                                <h5 class="mt-5 text-muted">No se encontraron precios de ventas. Por favor, registre un precio de venta para continuar.</h5>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="listaPrecios.length > 0">
+                            <div class="col-12 text-center">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Porcentaje</th>
+                                                    <th style="width: 40px">Opc.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let element of listaPrecios; let i = index">
+                                                    <td>{{ element.nombre }}</td>
+                                                    <td>{{ element.porcentaje }}<small>% </small></td>
+                                                    <td>
+                                                        <button (click)="click_eliminarPrecioVenta(element)" type="button" class="btn btn-danger btn-sm ms-2"><i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

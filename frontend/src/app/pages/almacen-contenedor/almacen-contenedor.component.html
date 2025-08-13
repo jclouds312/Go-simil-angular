@@ -1,0 +1,102 @@
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="modalAlmacenEditar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Actualizar Almacén</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>Nombre del Almacén</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="txtNombreEditar"
+                        #ctrl="ngModel" placeholder="Nombre del Almacén">
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="actualizarAlmacenById()" type="button"
+                    class="btn btn-success text-white">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Almacén: {{ lblNombreAlmacen }}</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Opciones</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-info btn-block" (click)="click_inventario()">Inventario de Productos</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-success btn-block" (click)="click_traspasoNuevo()">Nuevo Traspaso</button>
+                                </div>
+                                <div class="col-12 col-sm-4 mb-2">
+                                    <button type="button" class="btn btn-outline-warning btn-block" (click)="click_listaTraspaso()">Traspasos Salientes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Información</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);" (click)="click_editarAlmacen()"><i class="far fa-circle text-primary"></i> Editar Datos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);" (click)="click_eliminarAlmacen()"><i class="far fa-circle text-danger"></i> Eliminar</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>-->
+
+                </div>
+
+                <div class="col-12">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

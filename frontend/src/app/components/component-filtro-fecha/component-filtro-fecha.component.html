@@ -1,0 +1,73 @@
+<div class="col-12 col-sm-12" style="margin-top: 10px;">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                Filtro de Busqueda
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-4">
+                    <div class="form-group">
+                        <label>Seleccione el Tipo de Filtro</label>
+                        <select class="form-control" [(ngModel)]="tipoFiltro" (change)="change_tipoFiltro($event)">
+                            <option value="inicio"> Desde un Inicio </option>
+                            <option value="gestion"> Por Gestión </option>
+                            <option value="gestionMes"> Por Gestión y Mes </option>
+                            <option value="fechas"> Por Rango de Fechas </option>
+                            <!--<option value="semana"> Por Semana Actual </option>-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-4" *ngIf="tipoFiltro == 'gestion' || tipoFiltro == 'gestionMes'">
+                    <div class="form-group">
+                        <label>Seleccione la Gestión</label>
+                        <select class="form-control" [(ngModel)]="anhoSeleccionado" (change)="change_anho($event)">
+                             <option *ngFor="let gestion of anhoArray" [value]="gestion">{{ gestion }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-4" *ngIf="tipoFiltro == 'gestionMes'">
+                    <div class="form-group">
+                        <label>Seleccione el Mes</label>
+                        <select class="form-control" [(ngModel)]="mesSeleccionado" (change)="change_mes($event)">
+                            <option value="01">Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-4" *ngIf="tipoFiltro == 'fechas'">
+                    <div class="form-group">
+                        <label>Fecha de Inicio</label>
+                        <input type="date" class="form-control" [(ngModel)]="fechaInicio" #ctrl="ngModel">
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-4" *ngIf="tipoFiltro == 'fechas'">
+                    <div class="form-group">
+                        <label>Fecha Final</label>
+                        <input type="date" class="form-control" [(ngModel)]="fechaFin" #ctrl="ngModel">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="button" class="btn btn-success btn-block" (click)="click_buscar()"><i class="fa fa-search"></i>
+                        Realizar Busqueda</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>

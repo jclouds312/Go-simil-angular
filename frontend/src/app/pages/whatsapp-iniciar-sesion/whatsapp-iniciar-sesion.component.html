@@ -1,0 +1,35 @@
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-messenger"></i>
+                            VINCULACIÓN WHATSAPP
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12" *ngIf="qrInicioSesion != ''">
+                                <h4 class="text-center">{{ lblQrInicioSesion }}</h4>
+                                <img src="{{ qrInicioSesion }}" alt="">
+                            </div>
+                            <div class="col-12" *ngIf="qrInicioSesion == ''">
+                                <div class="callout callout-info">
+                                    <h5>Mensaje de Sesión</h5>
+
+                                    <p>{{ lblInicioSesion }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

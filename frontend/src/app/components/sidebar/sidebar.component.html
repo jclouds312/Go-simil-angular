@@ -1,0 +1,169 @@
+<!--
+primary #16C3DD
+primaryDark #17a2b8
+accent #00cc66
+accentDark #000000
+
+-->
+<aside class="main-sidebar sidebar-dark-primary elevation-4"  style="background-color: #ee3e48
+;">
+    <!-- Brand Logo -->
+
+    <div class="text-center">
+      <img src="assets/imagenes/logo.png" width="150px" alt="Logo" class="brand-image" style="margin-top: 20px;">
+      <a href="/" class="brand-link">
+        <span class="brand-text font-weight-light" style="color: #fff;"> <strong>SISTEMA DE <br> ADMINISTRACIÓN</strong></span>
+      </a>
+    </div>
+    
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <!-- <img src="{{url}}imagenes/usuarios/{{foto}}" class="img-circle elevation-2" alt="User Image"> -->
+          <img src="assets/imagenes/clienteLogo.jpg" alt="" class="brand-image img-circle elevation-3" style="width: 50px; height: 50px;">
+
+        </div>
+        <div class="info">
+          <span class="product-description" style="color: #fff;">{{lblNombreUsuario|titlecase}}   </span>
+          <a href="javascript:void(0);" class="d-block" style="color: #fff;">{{lblAppatUsuario|titlecase}} {{lblApmatUsuario|titlecase}}</a> 
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+
+          <!--<li class="nav-item">
+            <a routerLink="/" class="nav-link" style="color: #fff;">                
+              <i class="fas fa-cash-register nav-icon"></i>                    
+              <p>Panel de Control</p>
+            </a>
+          </li>-->
+
+              <!--<li class="nav-item">
+                <a routerLink="/" class="nav-link">                
+                  <i class="fas fa-cash-register nav-icon" style="color: #66c2a5;"></i>                    
+                  <p style="color: #fff;">Panel de Control</p>
+                </a>
+              </li>-->
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador' || idRol == 'Vendedor Optica' || idRol == 'Vendedor Audiosim'">
+                <a routerLink="/usuario/comision/1" class="nav-link">                
+                  <i class="fas fa-cash-register nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Mis Comisiones</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/cuenta" class="nav-link">                
+                  <i class="fas fa-cash-register nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Cuentas</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/categoria/lista" class="nav-link">                
+                  <i class="fas fa-tablets nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff">Categorias</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/producto" class="nav-link">                
+                  <i class="fas fa-tablets nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Productos</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/descuento/lista" class="nav-link">                
+                  <i class="fa fa-tag nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Descuentos</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/precio-venta" class="nav-link">                
+                  <i class="fa fa-money-bill nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Precios de Venta</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/almacen/lista" class="nav-link">                
+                  <i class="fa fa-store nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff">Almacenes</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/compra" class="nav-link">                
+                  <i class="fa fa-cart-plus nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff">Compras</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador' || idRol == 'Vendedor Optica' || idRol == 'Vendedor Audiosim'">
+                <a routerLink="/sucursal/lista" class="nav-link">                
+                  <i class="fa fa-store nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff">Sucursales</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/venta" class="nav-link">                
+                  <i class="fa fa-cart-plus nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff">Venta</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador' || idRol == 'Vendedor Optica' || idRol == 'Vendedor Audiosim'">
+                <a routerLink="/cliente/lista" class="nav-link" >                
+                  <i class="fas fa-users nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Clientes</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador'">
+                <a routerLink="/usuario" class="nav-link">                
+                  <i class="fas fa-user nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Usuarios</p>
+                </a>
+              </li>
+
+              <li class="nav-item" *ngIf="idRol == 'Administrador' || idRol == 'Vendedor Audiosim'">
+                <a routerLink="/audiometria" class="nav-link">                
+                  <i class="fas fa-user nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">Audiometria</p>
+                </a>
+              </li>
+
+              <!--<li class="nav-item">
+                <a routerLink="/whatsapp/iniciar-sesion" class="nav-link">                
+                  <i class="fas fa-user nav-icon" style="color: #fff;"></i>                    
+                  <p style="color: #fff;">WhatsApp</p>
+                </a>
+              </li>-->
+              
+               <!--CERRAR SESION -->
+              <li class="nav-item">                
+                <a href="javascript:void(0);" class="nav-link" (click)="click_cerrarSesion()">
+                  <i class="fas fa-sign-out-alt nav-icon" style="color: #fff;"></i>                   
+                  <p style="color: #fff;">Cerrar Sesion</p>
+                </a>                                
+              </li>
+              
+
+        </ul>
+      </nav>
+      
+
+
+      <!-- /.sidebar-menu -->
+    </div>  
+    <!-- /.sidebar -->
+    
+</aside>

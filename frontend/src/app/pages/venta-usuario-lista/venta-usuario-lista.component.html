@@ -1,0 +1,412 @@
+<app-modal-venta-credito-agregar
+    (eventOutput_pagoConfirmado)="eventOutput_pagoConfirmado($event)">
+</app-modal-venta-credito-agregar>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalVentaDetalle" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">DETALLE DE VENTA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-primary text-center">
+                            VENTA NRO.: {{ idVenta }}
+                        </h3>
+                    </div>
+
+                    <h5><strong>Opciones:</strong></h5>
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <div class="row">
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;" *ngIf="idCliente != '1'">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_enviarDocumentoYOtp()"><i class="fa fa-bell"></i>
+                                    {{ btnVentaEnviarDocumento }}</button>
+                            </div>
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_generarDocumentoPdf()"><i class="fa fa-bell"></i>
+                                    Generar PDF</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5><strong>Detalles:</strong></h5>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-hashtag"></i>
+                                    <strong>Usuario:</strong> {{ lblUsuario }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Origen:</strong> {{ lblVentaOrigen }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Cliente:</strong> {{ lblVentaDestino }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Fecha:</strong> {{ lblVentaFecha }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Hora:</strong> {{ lblVentaHora }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <table class="tableResponsivo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nro</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio ($)</th>
+                                    <th scope="col">SubTotal</th>
+                                    <th scope="col">Devolución</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaVentaDetalle; let i = index">
+                                    <td data-label="Nro" [ngClass]="{ 'text-amarillo':  element.devolucion === 1 }">{{ i+1 }}</td>
+                                    <td data-label="Producto" [ngClass]="{ 'text-amarillo':  element.devolucion === 1 }">
+                                        <small>COD:{{ element.codigoLiteral }}</small>
+                                        <br>
+                                        {{ element.nombre }}
+                                    </td>
+                                    <td data-label="Cantidad" [ngClass]="{ 'text-amarillo':  element.devolucion === 1 }">{{ element.cantidad }}</td>
+                                    <td data-label="Precio ($)" [ngClass]="{ 'text-amarillo':  element.devolucion === 1 }">
+                                        <small>Unit: {{ element.puntos }} LP</small>
+                                        <br>
+                                        {{ element.puntosSubTotal }}<small> LP</small>
+                                    </td>
+                                    <td data-label="SubTotal" [ngClass]="{ 'text-amarillo':  element.devolucion === 1 }">
+                                        <small>Unit: $ {{ element.ventaFormato }}</small>
+                                        <br>
+                                        <small>$ </small>{{ element.subTotalFormato }}
+                                    </td>
+                                    <td data-label="Devolución">
+                                        <div *ngIf="element.devolucion == '0'">
+                                            <button type="button" class="btn btn-danger btn-sm ms-2"
+                                                (click)="click_cantidadDevolucionProducto(element)"><i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div *ngIf="element.devolucion == '1'">
+                                            <span class="badge bg-warning">DEVOLUCIÓN</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-12 col-sm-6" style="margin-top: 30px;">
+                        <h5><strong>Detalles de Pago:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-6" style="margin-top: 30px;">
+                        <button type="button" class="btn btn-block btn-outline-primary btn-sm" (click)="click_eventInput_abrirModal()">Nuevo Pago</button>
+                    </div>
+                    
+                    <div class="col-12 text-center table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>Fecha</th>
+                                            <th>Monto</th>
+                                            <th>Cuenta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let element of listaPagos; let i = index">
+                                            <td>
+                                                <div *ngIf="element.pagado == '1'"><span class="badge bg-success">PAGADO</span></div>
+                                                <div *ngIf="element.pagado == '0'"><span class="badge bg-danger">PENDIENTE</span></div>
+                                            </td>
+                                            <td>
+                                                <div *ngIf="element.pagado == '0'">
+                                                    <small>Fecha de Pago</small>
+                                                    <br />
+                                                    <a>{{ element.fechaCredito }}</a>
+                                                </div>
+                                                <div *ngIf="element.pagado == '1'">
+                                                    <a>{{ element.fechaPago }}</a>
+                                                    <br />
+                                                    <small>Hora: {{ element.horaPago }}</small>
+                                                </div>
+                                                
+                                            </td>
+                                            <td>
+                                                <small>$</small> {{element.montoFormato}}
+                                            </td>
+                                            <td>
+                                                {{element.nombreCuenta}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 order-2 order-sm-1">
+                        <div class="row">
+                            <div class="col-12" *ngIf="idCliente != '1'">
+                                <div class="col-12" *ngIf="firmado == '1'">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                <strong>Firmado Electrónicamente por:</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                {{ lblVentaClienteOTP }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                <strong>OTP:</strong> {{ lblVentaOTP }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                <strong>Celular:</strong> {{ lblVentaCelular }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                <strong>Fecha:</strong> {{ lblVentaFechaOTP }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn-link text-secondary">
+                                                <strong>(Firma Electrónica)</strong></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12" *ngIf="firmado == '0'">
+                                    <h5 class="text-muted">EL CLIENTE NO FIRMÓ AUN LA RECEPCIÓN DE LOS PRODUCTOS</h5>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="idCliente == '1'">
+                                <h5 class="text-muted">NO SE REQUIERE FIRMA</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 order-1 order-sm-2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th class="">Cantidad de Productos:</th>
+                                    <td>{{ lblTotalCantidad }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total de Puntos:</th>
+                                    <td>{{ lblTotalPuntos }} <small>LP</small> </td>
+                                </tr>
+                                <tr ngClass="{{ pagado === 1 ? 'text-verde' : 'text-rojo' }}">
+                                    <th>Total Precio:</th>
+                                    <td> <small>$</small> {{ lblTotalPrecio }}</td>
+                                </tr>
+                                <tr ngClass="{{ pagado === 1 ? 'text-verde' : 'text-rojo' }}">
+                                    <th>Total Pagado:</th>
+                                    <td> <small>$</small> {{ lblTotalCredito }}</td>
+                                </tr>
+                                <tr ngClass="{{ pagado === 1 ? 'text-verde' : 'text-rojo' }}">
+                                    <th>Total Saldo:</th>
+                                    <td> <small>$</small> {{ lblTotalSaldo }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDevolucionProducto" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">DEVOLUCIÓN DE PRODUCTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Producto:</strong> {{ lblDevolucionProducto }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Cantidad de Venta:</strong> {{ lblDevolucionCantidad }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Precio de Venta:</strong> {{ lblDevolucionPrecio }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>SubTotal:</strong> {{ lblDevolucionSubTotal }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Cantidad de Devolución</label>
+                            <input type="number" class="form-control" [(ngModel)]="txtDevolucionCantidad" #ctrl="ngModel"
+                                placeholder="Cantidad">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                <button data-toggle="modal" (click)="click_devolucionProducto()" type="button" class="btn btn-info text-white">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content-header">
+        <div class="container-fluid">
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <h3>Ventas por Usuarios</h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <app-component-filtro-fecha
+                (eventOutput_buscar)="eventOutput_buscar($event)">
+            </app-component-filtro-fecha>
+
+    <section class="content">
+
+    <div class="row">
+        <div class="col-12 col-sm-12" style="margin-top: 10px;">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fa fa-arrow-right"></i>
+                        Todas las Ventas
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-block btn-outline-primary btn-sm" (click)="click_agregarVenta()">Nueva Venta</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" *ngIf="listaVentas.length == 0">
+                        <div class="col-12 text-center">
+                            <h5 class="mt-5 text-muted">No se encontraron registros de venta</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                        class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Opc.</th>
+                                <th>Usuario</th>
+                                <th>Ventas</th>
+                                <th>Total de Venta</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let element of listaVentas; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                    <button style="background-color: #00A884;" (click)="click_ventaDetalle(element)"
+                                        type="button" class="btn btn-success btn-sm ms-2"><i class="fa fa-eye"></i> Ver
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a>{{element.usuario ?? ''}}</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a>{{element.ventas}}</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a><small>$ </small>{{element.totalAcumuladoFormato}}</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Opc.</th>
+                                <th>Usuario</th>
+                                <th>Ventas</th>
+                                <th>Total de Venta</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

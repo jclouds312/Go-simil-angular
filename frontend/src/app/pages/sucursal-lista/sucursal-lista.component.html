@@ -1,0 +1,103 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalSucursalAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <!-- MODAL HEADER -->
+      <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+        <h5 class="modal-title" id="staticBackdropLabel">Nuevo Sucursal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color: #fff;">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="txtNombre" #ctrl="ngModel"
+            placeholder="Nombre del Sucursal">
+        </div>
+
+      </div>
+
+      <!-- FOOTER MODAL -->
+      <div class="modal-footer justify-content-between"  style="background-color: #fff;">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+        <button data-toggle="modal" (click)="agregarSucursal()" type="button"
+          class="btn btn-success text-white">Registrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="content-wrapper">
+  <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Sucursales</h1>
+                </div>
+                
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-12 col-sm-12" style="margin-top: 10px;">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fa fa-store"></i>
+              Sucursales
+            </h3>
+
+            <div class="card-tools" *ngIf="idRol == 'Administrador'">
+              <button type="button" class="btn btn-block btn-outline-primary btn-sm" (click)="click_agregarSucursal()">Nuevo Sucursal</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="listaSucursal.length == 0">
+                <div class="col-12 text-center">
+                    <h5 class="mt-5 text-muted">No se encontraron sucursales registrados. Por favor, registre un sucursal para continuar.</h5>
+                </div>
+            </div>
+            <div class="row" *ngIf="listaSucursal.length > 0">
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column"
+                *ngFor="let element of listaSucursal; let i = index">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header border-bottom-0"
+                    style="background-color: #4e66c2; color: #fff; padding-top: 5px;  padding-bottom: 8px;">
+                    <span style="font-size: 90%; color: #f0f0f0;">Sucursal:</span> <br> {{element.nombreSucursal}}
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <img src="assets/imagenes/sucursal.png" alt="sucursal" class="img-circle img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-12">
+                          <button type="button" class="btn btn-success btn-block" (click)="click_sucursal(element)"><i class="fa fa-eye"></i>
+                              Ir al Sucursal</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>

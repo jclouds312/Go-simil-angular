@@ -1,0 +1,307 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalHistorialProducto" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Inventario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row" *ngIf="listaHistorialProductos.length == 0">
+                    <div class="col-12 text-center">
+                        <h5 class="mt-2 text-muted">No se encontro Historial del producto</h5>
+                    </div>
+                </div>
+                <div class="row" *ngIf="listaHistorialProductos.length > 0">
+                    <div class="col-12">
+                        <table class="tableResponsivo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Compra</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaHistorialProductos; let i = index">
+                                    <td data-label="Fecha">
+                                        {{ element.fechaCompra }}
+                                        <br>
+                                        <small>hora: {{ element.horaCompra }}</small>
+                                    </td>
+                                    <td data-label="Compra">
+                                        Nro.: {{ element.idCompra }}
+                                    </td>
+                                    <td data-label="Cantidad">
+                                        {{ element.cantidad }}
+                                    </td>
+                                    <td data-label="Precio">
+                                        <small>SubTotal: $ {{ element.subTotalFormato }}</small>
+                                        <br>
+                                        <strong><small>$ </small>{{ element.costoFormato }}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalPrecioVenta" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Lista de Precio de Venta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Nombre Precio</th>
+                                    <th class="text-center">Porcentaje</th>
+                                    <th class="text-center">Precio Venta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaPrecioVenta; let i = index">
+                                    <td class="text-center">{{ element.nombre }}</td>
+                                    <td class="text-center">{{ element.porcentaje }}<small>%</small> </td>
+                                    <td class="text-center"> <small>$</small> {{ element.precioVentaFormato }}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Nueva Compra</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-6 order-1 order-sm-1" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-cart-plus"></i>
+                            Productos a Seleccionar
+                        </h3>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Producto</label>
+                                    <select class="form-control" [(ngModel)]="cboxProducto">
+                                        <option [ngValue]="null" disabled selected>Seleccione un Producto</option>
+                                        <option *ngFor="let element of listaProductos" [ngValue]="element">
+                                            {{ element.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Fecha de Vencimiento</label>
+                                    <input type="date" class="form-control" [(ngModel)]="txtFecVen" #ctrl="ngModel"
+                                        placeholder="Fecha de Vencimiento">
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <button type="button" class="btn btn-danger btn-block btn-flat"
+                                    (click)="click_historialProducto()">Historial de Compra</button>
+                            </div>
+
+                            <div class="col-6">
+                                <button type="button" class="btn btn-success btn-block btn-flat"
+                                    (click)="click_precioVenta()">Precios de Venta</button>
+                            </div>
+
+                            <div class="col-5" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label>Cantidad</label>
+                                    <input type="number" class="form-control" [(ngModel)]="txtCantidad" #ctrl="ngModel"
+                                        placeholder="Cantidad">
+                                </div>
+                            </div>
+
+                            <div class="col-7" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label>Costo de Adquisición</label>
+                                    <input type="number" class="form-control" [(ngModel)]="txtCosto" #ctrl="ngModel"
+                                        placeholder="Costo unitario">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_agregarProducto()"><i class="fa fa-cart-plus"></i>
+                                    Agregar a Carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 order-3 order-sm-2" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Destino de la Compra</h3>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Lugar de Almacenamiento</label>
+                                    <select class="form-control" [(ngModel)]="cboxAlmacen">
+                                        <option [ngValue]="null" disabled selected>Seleccione un Producto</option>
+                                        <option *ngFor="let element of listaAlmacen" [ngValue]="element.idAlmacen">
+                                            {{ element.nombreAlmacen }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Cuenta de Origen</label>
+                                    <select class="form-control" [(ngModel)]="cboxCuenta">
+                                        <option [ngValue]="null" disabled selected>Seleccione una Cuenta</option>
+                                        <option *ngFor="let element of listaCuentas" [ngValue]="element.idCuenta">
+                                            {{ element.alias }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Detalle de la Compra</label>
+                                    <textarea class="form-control" [(ngModel)]="txtDetalle"
+                                    #ctrl="ngModel" rows="3" placeholder="Nota"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-success btn-block" (click)="agregarCompra()"><i class="fa fa-check"></i>
+                                    Finalizar Compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 order-2 order-sm-3" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Carrito de Compra</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Eliminar</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo Unit.</th>
+                                    <th>SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaCarrito; let i = index">
+                                    <td>{{ i+1 }}.</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm ms-2"
+                                            (click)="click_eliminarProducto(element)"><i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <small>COD:{{ element.codigoLiteral }}</small>
+                                                <br/>
+                                                <a>{{ element.nombre }}</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>{{ element.cantidad }}</td>
+                                    <td> <small>$</small> {{ element.costo }}</td>
+                                    <td> <small>$</small> {{ element.subTotal }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-9">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Total Compra:</th>
+                                            <td><small>$</small> {{ lblTotal }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

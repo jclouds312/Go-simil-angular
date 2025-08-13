@@ -1,0 +1,295 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalProductoInventario" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Inventario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Detalle</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaHistorial; let i = index">
+                                    <td>{{ i+1 }}.</td>
+                                    <td class="badge" style="margin-top: 7px;"
+                                        ngClass="{{ element.tipo === 1 ? 'bg-success' : 'bg-danger' }}">{{
+                                        element.tipoLiteral }}</td>
+                                    <td>{{ element.cantidad }}</td>
+                                    <td>{{ element.detalle }}</td>
+                                    <td>
+                                        {{ element.fecha }}
+                                        <br>
+                                        <small>Hora: {{ element.hora }}</small></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mt-2">
+            <div class="col-sm-12">
+                <h3>Inventario de Productos</h3>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color: #00A884; color: #fff;"><i
+                        class="fas fa-shopping-cart"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Productos</span>
+                    <span class="info-box-number">{{ listaProductos.length }} - {{ lblTotalAlmacenCantidad }}
+                        Uds.</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color: #00A884; color: #fff;"><i
+                        class="far fa-star"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Puntos</span>
+                    <span class="info-box-number">{{ lblTotalAlmacenPuntos }} <small>LP</small> </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color: #00A884; color: #fff;"><i
+                        class="fa fa-money-bill"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Costo Inversión</span>
+                    <span class="info-box-number"> <small>$</small> {{ lblTotalAlmacenCosto }}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Inventario de Productos</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" *ngIf="listaProductos.length == 0">
+                <div class="col-12 text-center">
+                    <h5 class="mt-5 text-muted">No se encontraron productos en el almacén registrados. Por favor, registre una nueva compra para tener inventario.</h5>
+                </div>
+            </div>
+            <div class="row" *ngIf="listaProductos.length > 0">
+                <div class="col-12 text-center table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Opc.</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let element of listaProductos; let i = index">
+                                <td>
+                                    {{ i+1 }}.
+                                </td>
+                                <td class="project-actions text-right">
+                                    <button type="button" class="btn btn-info btn-sm ms-2"
+                                        (click)="click_verProductos(element)"><i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <small>COD: {{ element.codigoLiteral }}</small>
+                                            <br />
+                                            <a>{{ element.nombreProducto }}</a>
+                                        </li>
+
+                                    </ul>
+                                </td>
+                                <td>
+                                    {{element.cantidad}}
+                                </td>
+                                <td>
+                                    {{element.puntosProducto}} <small>LP</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Inventario de Productos</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div #seccionInventarioDetalle class="card-body">
+            <div class="row" *ngIf="listaProductos.length > 0">
+                <div class="col-12 order-md-2" *ngIf="lblProductoNombre != ''">
+                    <h3 class="text-primary text-center">
+                        <img class="img-circle img-bordered-sm" src="assets/imagenes/logo.png" alt="User Image"
+                            width="70px" height="70px">{{ lblProductoNombre }}
+                    </h3>
+
+                    <p class="text-muted">{{ lblProductoDescripcion }}</p>
+
+                    <h5 class="text-muted">Datos del Producto</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="" class="btn-link text-secondary"><i class="fa fa-fw fa-hashtag"></i>
+                                Codigo: {{ lblProductoCodigo }}</a>
+                        </li>
+                        <li>
+                            <a href="" class="btn-link text-secondary"><i class="fa fa-fw fa-dollar-sign"></i>
+                                Precio: <small>$</small> {{ lblProductoPrecio }}</a>
+                        </li>
+                        <li>
+                            <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-star"></i>
+                                Puntos: {{ lblProductoPuntos }} <small>LP</small></a>
+                        </li>
+                    </ul>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Fec. Venc.</th>
+                                <th>Cantidad</th>
+                                <th>Costo</th>
+                                <th>Puntos</th>
+                                <th style="width: 40px">Opc.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let element of listaProductosInventario; let i = index">
+                                <td>{{ i+1 }}.</td>
+                                <td>{{ element.fechaVencimiento }}</td>
+                                <td><span class="badge bg-danger">{{ element.cantidad }}</span></td>
+                                <td> <small>$</small> {{ element.costo }}</td>
+                                <td>{{ element.puntosSubTotal }} <small>LP</small> </td>
+                                <td>
+                                    <button style="background-color: #00A884;" (click)="click_verHistorial(element)"
+                                        data-toggle="modal" type="button" class="btn btn-success btn-sm ms-2"><i
+                                            class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="row">
+
+                        <div class="text-center mb-3">
+                            <!--<a href="#" class="btn btn-sm btn-primary">Add files</a>-->
+                            <a href="javascript:void(0);" class="btn btn-sm btn-success"
+                                (click)="click_verHistorialTodo()">Ver Todo el Historial</a>
+                        </div>
+
+                        <!-- accepted payments column -->
+                        <div class="col-3">
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-9">
+                            <p class="lead">Información</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th style="width:50%">Total Costo:</th>
+                                        <td> <small>$</small> {{ lblTotalCosto }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cantidad Total:</th>
+                                        <td>{{ lblTotalCantidad }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Puntos Total:</th>
+                                        <td>{{ lblTotalPuntos }} <small>LP</small> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="col-12 order-md-2 text-center" *ngIf="lblProductoNombre == ''">
+                    <h5 class="mt-5 text-muted">Por favor, selecciona un producto para ver su inventario e historial.
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

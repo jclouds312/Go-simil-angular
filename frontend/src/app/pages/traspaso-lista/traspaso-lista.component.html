@@ -1,0 +1,238 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalTraspasoDetalle" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Detalle del Traspaso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-primary text-center">
+                            TRASPASO NRO.: {{ idTraspaso }}
+                        </h3>
+                    </div>
+                    
+                    <h5><strong>Opciones:</strong></h5>
+                    <div class="col-12" style="margin-bottom: 20px;">
+                        <div class="row">
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;" *ngIf="idClienteDestino != '1'">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_enviarDocumentoYOtp()"><i class="fa fa-bell"></i>
+                                    {{ btnTraspasoEnviarDocumento }}</button>
+                            </div>
+                            <div class="col-12 col-sm-6" style="margin-bottom: 10px;">
+                                <button type="button" class="btn btn-info btn-block btn-flat"
+                                    (click)="click_generarDocumentoPdf()"><i class="fa fa-bell"></i>
+                                    Generar PDF</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5><strong>Detalles:</strong></h5>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-hashtag"></i>
+                                    <strong>Usuario:</strong> {{ lblUsuario }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="fa fa-fw fa-dollar-sign"></i>
+                                    <strong>Origen:</strong> {{ lblTraspasoOrigen }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Destino:</strong> {{ lblTraspasoDestino }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Fecha:</strong> {{ lblTraspasoFecha }}</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="btn-link text-secondary"><i
+                                        class="far fa-fw fa-star"></i>
+                                    <strong>Hora:</strong> {{ lblTraspasoHora }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <table class="tableResponsivo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nro</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Puntos</th>
+                                    <th scope="col">SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaTraspasoDetalle; let i = index">
+                                    <td data-label="Nro">{{ i+1 }}</td>
+                                    <td data-label="Producto">
+                                        <small>COD:{{ element.codigoLiteral }}</small>
+                                        <br>
+                                        {{ element.nombre }}
+                                    </td>
+                                    <td data-label="Cantidad">{{ element.cantidad }}</td>
+                                    <td data-label="Puntos">
+                                        <small>Unit: {{ element.puntos }} LP</small>
+                                        <br>
+                                        {{ element.puntosSubTotal }}<small> LP</small>
+                                    </td>
+                                    <td data-label="SubTotal">
+                                        <small>Unit: $ {{ element.costo }}</small>
+                                        <br>
+                                        <small>$ </small>{{ element.subTotalFormato }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-4 order-2 order-sm-1">
+
+                    </div>
+                    <div class="col-12 col-sm-8 order-1 order-sm-2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th class="">Cantidad de Productos:</th>
+                                    <td>{{ lblTotalCantidad }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total de Puntos:</th>
+                                    <td>{{ lblTotalPuntos }} <small>LP</small> </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Precio:</th>
+                                    <td> <small>$</small> {{ lblTotalPrecio }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mt-2">
+            <div class="col-sm-12">
+                <h3>Lista de Traspasos (Salidas)</h3>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12 col-sm-12" style="margin-top: 10px;">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fa fa-arrow-right"></i>
+                        Traspasos de Salida
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row" *ngIf="listaTraspasos.length == 0">
+                        <div class="col-12 text-center">
+                            <h5 class="mt-5 text-muted">No se encontraron registros de traspasos salientes</h5>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="listaTraspasos.length > 0">
+                        <div class="col-12 text-center">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                                class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Opc.</th>
+                                        <th>Destino</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let element of listaTraspasos; let i = index">
+                                        <td>{{ element.idTraspaso }}</td>
+                                        <td>
+                                            <button style="background-color: #00A884;"
+                                                (click)="click_traspasoDetalle(element)" type="button"
+                                                class="btn btn-success btn-sm ms-2"><i class="fa fa-eye"></i> Ver
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <small>{{element.tipoDestino}}</small>
+                                                    <br />
+                                                    <a>{{element.nombreAlmacenDestino ?? ''}}
+                                                        {{element.nombreClienteDestino ??
+                                                        ''}}</a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <a>{{element.fechaTraspaso}}</a>
+                                                    <br />
+                                                    <small>Hora: {{element.horaTraspaso}}</small>
+
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Opc.</th>
+                                        <th>Destino</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

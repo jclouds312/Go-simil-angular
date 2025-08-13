@@ -1,0 +1,345 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalProductoAgregar" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label>Codigo</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtCodigo" #ctrl="ngModel"
+                                placeholder="Codigo del Producto">
+                        </div>
+                    </div>
+
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label>Nombre del Producto</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNombre" #ctrl="ngModel"
+                                placeholder="Nombre del Producto">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Descripción del Producto</label>
+                            <textarea class="form-control" [(ngModel)]="txtDescripcion" #ctrl="ngModel" rows="3"
+                                placeholder="Descripción del Producto"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Precio ($)</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtPrecio" #ctrl="ngModel"
+                                placeholder="Precio Sugerido">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select class="form-control" [(ngModel)]="idCategoria">
+                                <option [ngValue]="null" disabled selected>Seleccione una Categoria</option>
+                                <option *ngFor="let element of listaCategoria" [ngValue]="element.idCategoria">
+                                    {{ element.nombreCategoria }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarProducto()" type="button"
+                    class="btn btn-success text-white">Registrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalProductoActualizarDatos" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Actualizar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label>Codigo</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtEditarCodigo" #ctrl="ngModel"
+                                placeholder="Codigo del Producto">
+                        </div>
+                    </div>
+
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label>Nombre del Producto</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtEditarNombre" #ctrl="ngModel"
+                                placeholder="Nombre del Producto">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Descripción del Producto</label>
+                            <textarea class="form-control" [(ngModel)]="txtEditarDescripcion" #ctrl="ngModel" rows="3"
+                                placeholder="Descripción del Producto"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Precio Actual ($)</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtEditarPrecio" #ctrl="ngModel"
+                                placeholder="Precio Actual">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select class="form-control" [(ngModel)]="idCategoria">
+                                <option [ngValue]="null" disabled selected>Seleccione una Categoria</option>
+                                <option *ngFor="let element of listaCategoria" [ngValue]="element.idCategoria">
+                                    {{ element.nombreCategoria }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="actualizarDatosProductodByid()" type="button"
+                    class="btn btn-success text-white">Actualizar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalProductoAlmacen" data-bs-focus="false" data-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Inventario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row" *ngIf="listaProductosAlmacen.length == 0">
+                    <div class="col-12 text-center">
+                        <h5 class="mt-5 text-muted">No se encontraron productos en los almacenes</h5>
+                    </div>
+                </div>
+                <div class="row" *ngIf="listaProductosAlmacen.length > 0">
+                    <div class="col-12">
+                        <table class="tableResponsivo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Almacen</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Costo</th>
+                                    <th scope="col">Fecha Vencimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaProductosAlmacen; let i = index">
+                                    <td data-label="Almacen">
+                                        {{ element.nombreAlmacen }}
+                                    </td>
+                                    <td data-label="Cantidad">
+                                        {{ element.cantidad }}
+                                    </td>
+                                    <td data-label="Costo">
+                                        <small>SubTotal: $ {{ element.costoSubTotalFormato }}</small>
+                                        <br>
+                                        <strong><small>$ </small>{{ element.costoFormato }}</strong>
+                                    </td>
+                                    <td data-label="Fecha Vencimiento">
+                                        {{ element.fechaVencimiento }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" *ngIf="listaProductosCliente.length == 0">
+                    <div class="col-12 text-center">
+                        <h5 class="mt-5 text-muted">No se encontraron productos en los clientes</h5>
+                    </div>
+                </div>
+                <div class="row" *ngIf="listaProductosCliente.length > 0">
+                    <div class="col-12">
+                        <table class="tableResponsivo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Venta</th>
+                                    <th scope="col">Fecha Vencimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let element of listaProductosCliente; let i = index">
+                                    <td data-label="Almacen">
+                                        {{ element.cliente }}
+                                    </td>
+                                    <td data-label="Cantidad">
+                                        {{ element.cantidad }}
+                                    </td>
+                                    <td data-label="Venta">
+                                        <small>SubTotal: $ {{ element.subTotalFormato }}</small>
+                                        <br>
+                                        <strong><small>$ </small>{{ element.ventaFormato }}</strong>
+                                    </td>
+                                    <td data-label="Fecha Vencimiento">
+                                        {{ element.fechaVencimiento }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Productos</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-tablets"></i>
+                            Productos Disponibles
+                        </h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-block btn-outline-success btn-sm"
+                                (click)="click_agregarProducto()">Nuevo Producto</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="listaProductos.length == 0">
+                            <div class="col-12 text-center">
+                                <h5 class="mt-5 text-muted">No se encontraron productos registrados. Por favor, registre un nuevo producto para continuar.</h5>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="listaProductos.length > 0">
+                            <div class="col-12 text-center table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Opc.</th>
+                                            <th>Producto</th>
+                                            <th>Precio</th>
+                                            <th>Categoria</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let element of listaProductos; let i = index">
+                                            <td>
+                                                {{ i+1 }}.
+                                            </td>
+                                            <td class="project-actions text-right">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-info" (click)="click_buscarProducto(element)">Buscar</button>
+                                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" href="javascript:void(0);" (click)="click_actualizarDatos(element)"><i class="fas fa-edit"></i> Actualizar Datos</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <small>COD: {{ element.codigoLiteral }}</small>
+                                                        <br />
+                                                        <a>{{ element.nombre }}</a>
+                                                    </li>
+
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <small>$</small> {{element.precioFormato}}
+                                            </td>
+                                            <td>
+                                                {{element.nombreCategoria}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

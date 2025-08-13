@@ -1,0 +1,89 @@
+{
+  "autorizacion": {
+    "token": {
+      "error": {
+        "codigo": "-101",
+        "mensaje": "El token proporcionado no es válido. Por favor, verifica tus credenciales e inténtalo nuevamente.",
+        "descripcion": ""
+      }  
+    },
+    "dispositivo": {
+      "error": {
+        "codigo": "-102",
+        "mensaje": "El dispositivo proporcionado no es válido. Por favor, verifica tus credenciales e inténtalo nuevamente.",
+        "descripcion": ""
+      } 
+    },
+    "ip": {
+      "error": {
+        "codigo": "-103",
+        "mensaje": "La IP proporcionado no es válido. Por favor, verifica tus credenciales e inténtalo nuevamente.",
+        "descripcion": ""
+      }
+    }
+  },
+  "validacion": {
+    "error": {
+      "codigo": "-100",
+      "mensaje": "Parece que faltan algunos datos necesarios para completar esta operación. Por favor, verifica e inténtalo nuevamente.",
+      "descripcion": ""
+    } 
+  },
+  "proceso": {
+    "nivelRuta": {
+      "correcto": {
+        "codigo": "0",
+        "mensaje": "Proceso Correcto",
+        "descripcion": ""
+      },
+      "error": {
+        "codigo": "-1",
+        "mensaje": "La solicitud fue enviada, pero no pudo completarse en este momento. Por favor, inténtalo nuevamente más tarde.",
+        "descripcion": ""
+      }  
+    },
+    "nivelControlador": {
+      "correcto": {
+        "codigo": "0",
+        "mensaje": "Proceso Correcto",
+        "descripcion": ""
+      },
+      "error": {
+        "codigo": "-2",
+        "mensaje": "No se pudo completar el proceso en este momento. Por favor, inténtalo nuevamente más tarde.",
+        "descripcion": ""
+      }  
+    },
+    "nivelModelo": {
+      "correcto": {
+        "codigo": "0",
+        "mensaje": "Proceso Correcto",
+        "descripcion": ""
+      },
+      "error": {
+        "codigo": "-3",
+        "mensaje": "No se pudo procesar la data en este momento. Por favor, inténtalo nuevamente más tarde.",
+        "descripcion": ""
+      }  
+    },
+    "nivelReporte": {
+      "correcto": {
+        "codigo": "0",
+        "mensaje": "Proceso Correcto",
+        "descripcion": ""
+      },
+      "error": {
+        "codigo": "-5",
+        "mensaje": "No se pudo generar el documento pdf en este momento. Por favor, inténtalo nuevamente más tarde.",
+        "descripcion": ""
+      }  
+    }
+  },
+  "basedatos": {
+    "error": {
+      "codigo": "-4",
+      "mensaje": "El servidor de información no está disponible. Por favor, intente más tarde.",
+      "descripcion": ""
+    } 
+  }
+}

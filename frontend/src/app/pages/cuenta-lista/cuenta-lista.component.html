@@ -1,0 +1,153 @@
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="modalCuentaAgregar" data-bs-focus="false" data-bs-backdrop="static" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- MODAL HEADER -->
+            <div class="modal-header" style="background-color: #3c54a5; color: #fff;">
+                <h5 class="modal-title" id="staticBackdropLabel">Nueva Cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-12">
+                        <label>Acceso a Sucursal:</label>
+                        <select class="form-control" [(ngModel)]="idSucursalAgregar">
+                            <option [ngValue]="null" disabled selected>Seleccione una Sucursal</option>
+                            <option *ngFor="let element of listaSucursales" [ngValue]="element.idSucursal">
+                                {{ element.nombreSucursal }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Nombre de Alias</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNombre" #ctrl="ngModel"
+                                placeholder="Nombre">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Banco</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtBanco" #ctrl="ngModel"
+                                placeholder="Nombre del Banco">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Número de Cuenta</label>
+                            <input type="text" class="form-control" [(ngModel)]="txtNroCuenta" #ctrl="ngModel"
+                                placeholder="Número de Cuenta">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER MODAL -->
+            <div class="modal-footer justify-content-between" style="background-color: #fff;">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+
+                <button data-toggle="modal" (click)="agregarCuenta()" type="button"
+                    class="btn btn-info text-white">Registrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="{ 'content-wrapper': idSucursal === '' }">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>Lista de Cuentas</h1>
+                </div>
+                
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12 col-sm-12" style="margin-top: 10px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-cash-register"></i>
+                            Cuentas Bancarias
+                        </h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-block btn-outline-success btn-sm"
+                                (click)="click_agregarCuenta()" *ngIf="idRol == 'Administrador'">Nueva Cuenta</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="listaCuentas.length == 0">
+                            <div class="col-12 text-center">
+                                <h5 class="mt-5 text-muted">No se encontraron cuentas registradas. Por favor, registre una nueva cuenta para continuar.</h5>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="listaCuentas.length > 0">
+                            <div class="col-12 text-center">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example1" width="100%"
+                                class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Opc.</th>
+                                            <th>Cuenta</th>
+                                            <th>Banco</th>
+                                            <th>Nro. Cuenta</th>
+                                            <th>Sucursal</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr *ngFor="let element of listaCuentas; let i = index">
+                                            <td>{{i+1}}</td>
+                                            <td>
+                                                <button style="background-color: #00A884;" (click)="click_verCuenta(element)"
+                                                    type="button"
+                                                    class="btn btn-success btn-sm ms-2"><i class="fa fa-eye"></i> Ver
+                                                </button>
+
+                                            </td>
+                                            <td>{{element.alias}}</td>
+                                            <td>{{element.banco}}</td>
+                                            <td>{{element.numeroCuenta}}</td>
+                                            <td>{{element.nombreSucursal}}</td>
+                                        </tr>
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Opc.</th>
+                                            <th>Cuenta</th>
+                                            <th>Banco</th>
+                                            <th>Nro. Cuenta</th>
+                                            <th>Sucursal</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
