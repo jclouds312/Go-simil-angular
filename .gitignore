@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Build de Angular
+frontend/dist/
+
+# Archivos del sistema
+.DS_Store
+.env

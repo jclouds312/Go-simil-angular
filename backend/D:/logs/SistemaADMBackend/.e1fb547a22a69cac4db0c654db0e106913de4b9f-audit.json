@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:/logs/SistemaADMBackend/.e1fb547a22a69cac4db0c654db0e106913de4b9f-audit.json",
+    "files": [
+        {
+            "date": 1755186436587,
+            "name": "D:/logs/SistemaADMBackend/2025-08-14.log",
+            "hash": "4c3375d9208de694fded754ebe05f6586609fc1f03c363dcf1c1a9028a8c0c6f"
+        }
+    ],
+    "hashType": "sha256"
+}
