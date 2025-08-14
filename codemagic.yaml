@@ -1,0 +1,36 @@
+workflows:
+  build_and_deploy:
+    name: Build Angular + Node Backend
+    max_build_duration: 30
+    environment:
+      node: 18
+      vars:
+        NODE_ENV: produccion
+        DB_HOST: $DB_HOST
+        DB_USER: $DB_USER
+        DB_PASS: $DB_PASS
+        DB_NAME: $DB_NAME
+    scripts:
+      - name: Instalar dependencias frontend
+        script: |
+          cd frontend
+          npm install
+      - name: Compilar Angular
+        script: |
+          npm run build --prod
+      - name: Mover build al backend/public
+        script: |
+          mkdir -p ../backend/public
+          cp -r dist/* ../backend/public/
+      - name: Instalar dependencias backend
+        script: |
+          cd ../backend
+          npm install
+    artifacts:
+      - backend/**
+    publishing:
+      scripts:
+        - name: Ejecutar backend
+          script: |
+            cd backend
+            npm run produccion
